@@ -152,7 +152,7 @@ void print_list(struct Node **head_ref) {
       printf(", ");
     }
   }
-  printf("}\n");
+  printf("}\n\n");
 }
 
 
@@ -177,7 +177,7 @@ void remove_ind(struct Node **head_ref, int ind) {
 
   struct Node *prev = NULL;
   struct Node *curr = (*head_ref);
-  for(int i=0; i<ind-1; i++) {
+  for(int i=0; i<ind; i++) {
     if(curr==NULL) {
       puts("Could not remove: array index out of bounds.");
       return;
@@ -186,6 +186,9 @@ void remove_ind(struct Node **head_ref, int ind) {
     curr=curr->next;
   }
 
-  prev->next = curr->next;
+  if(prev==NULL) (*head_ref)=curr->next;
+  else {
+    prev->next = curr->next;
+  }
   free(curr);
 }
